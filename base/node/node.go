@@ -14,6 +14,14 @@ func NewNode(v int, left, right *Node) *Node {
 	}
 }
 
+/*
+	0
+   / \
+  1  2
+  \  /
+  3  4
+*/
+
 func NewTree1() *Node {
 	nodes := make([]*Node, 0, 5)
 	for i := 0; i < 5; i++ {
