@@ -6,7 +6,7 @@ import (
 )
 
 type Operation struct {
-	// 1:exec, 2:visit
+	// 1:exec_now, 2:visit_children
 	Typ  int
 	Node *node.Node
 }
