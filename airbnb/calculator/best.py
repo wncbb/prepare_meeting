@@ -10,6 +10,7 @@ class Solution:
 
         s = s.strip()
         for i, c in enumerate(s):
+            print 'num:', num, ' op:', op, ' c:', c, ' i:', i
             if c == ' ': continue
             elif '0' <= c and c <= '9':
                 num = num * 10 + int(c)
@@ -24,7 +25,8 @@ class Solution:
                 op = c
                 num = 0
 
-        ans = 0
-        while len(stack) > 0: ans += stack.pop()
-        return ans
-
+        return sum(stack)
+s=Solution()
+raw='12*13+14'
+rst=s.calculate(raw)
+print rst
