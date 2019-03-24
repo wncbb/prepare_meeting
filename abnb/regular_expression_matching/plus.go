@@ -30,6 +30,10 @@ func isMatch(s string, p string) bool {
 	for i := 0; i < len(s); i = i + 1 {
 		for j := 0; j < len(p); j = j + 1 {
 			switch p[j : j+1] {
+			case "+":
+				if s[i] == p[j-1] || p[j-1:j] == "." {
+					dp[i+1][j+1] = dp[i][j-1] || dp[i][j+1]
+				}
 			case "*":
 				/*
 				   XXXa
@@ -55,6 +59,6 @@ func isMatch(s string, p string) bool {
 
 func main() {
 	s := "aab"
-	p := "c*a*b"
+	p := "c*a*bc+"
 	println(isMatch(s, p))
 }
