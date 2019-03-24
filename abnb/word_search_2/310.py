@@ -80,6 +80,6 @@ board=[
     ['a', 'g', 'a', 'i'],
     ['d', 'c', 'a', 'n'],
 ]
-words=["dog", "dad", "dgdg", "can", "again"]
+words=["doa", "dog", "dad", "dgdg", "can", "again"]
 s=Solution()
 print s.wordSearchII(board, words)

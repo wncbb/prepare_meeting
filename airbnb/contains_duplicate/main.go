@@ -1,3 +1,5 @@
+package tmp
+
 /**
  * @param nums: the given array
  * @param k: the given k
@@ -6,7 +8,7 @@
  */
 func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
 	// Write your code here
-	if len(nums) == 0 || k <= 0 || t < 0 {
+	if len(nums) == 0 || k < 0 || t <= 0 {
 		return false
 	}
 

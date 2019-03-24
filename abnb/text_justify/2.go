@@ -48,7 +48,6 @@ func fullJustify(words []string, maxWidth int) []string {
 			// TODO: 是badness[i][j-1]
 			// if badness[i][j] < 0 {
 			if badness[i][j-1] < 0 {
-
 				continue
 			}
 			if cost[i] < 0 || cost[i] > (badness[i][j-1]+cost[j]) {

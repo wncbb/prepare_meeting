@@ -20,6 +20,8 @@ Return 3 // we can get the largest collection["abc", "defi", "gh"]
 Related Problems
 """
 
+import collections
+
 # This reference program is provided by @jiuzhang.com
 # Copyright is reserved. Please indicate the source for forwarding
 
@@ -79,7 +81,7 @@ class Solution:
                     
                     if len(self.temp) > len(self.results):
                         self.results = self.temp[:]
-                        
+                    # 会直到下一个可用的位置
                     self.dfs(i, j, root)
                     self.temp.pop()
                     for px, py in path:
@@ -109,3 +111,11 @@ class Solution:
             self.getAllPaths(newx, newy, paths, temp, root)
             temp.pop()
         self.visited[i][j] = False
+
+s=Solution()
+board=[['a', 'b', 'c'],
+    ['d', 'e', 'f'],
+    ['g', 'h', 'i']]
+words=["abc", "cfi", "beh", "defi", "gh"]
+rst=s.boggleGame(board, words)
+print rst

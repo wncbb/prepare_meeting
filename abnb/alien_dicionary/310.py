@@ -72,6 +72,7 @@ class Solution:
                         graph[words[i][j]]=set()
                     graph[words[i][j]].add(words[i+1][j])
                     # 非常重要
+                    # 这个字母不一样，后面的顺序是没有意义的
                     break
         return graph
 

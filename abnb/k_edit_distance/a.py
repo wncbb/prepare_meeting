@@ -19,14 +19,13 @@ class TrieNode:
                 p.children[c]=child
             p=child
         p.isWord=True
+        p.word=word
 
 class Solution:
-    def dfs(self, prevDp, root, tempWord, layer):
-        print 'tempWord ', tempWord
+    def dfs(self, prevDp, root, layer):
         print 'prevDp ', prevDp
         if root.isWord and prevDp[-1]<=self.k:
-            print tempWord
-            self.result.append(''.join(tempWord))
+            self.result.append(root.word)
 
         for ch in root.children:
             dp=[0]*len(self.target)
@@ -36,9 +35,7 @@ class Solution:
                     dp[j]=prevDp[j-1]
                 else:
                     dp[j]=min(prevDp[j], prevDp[j-1], dp[j-1])+1
-            tempWord.append(ch)
-            self.dfs(dp, root.children[ch], tempWord, layer+1)
-            tempWord.pop()
+            self.dfs(dp, root.children[ch], layer+1)
 
     def kDistance(self, words, target, k):
         self.result=[]
@@ -54,7 +51,7 @@ class Solution:
         #     dp[i]=i
         dp=[i for i in range(len(self.target))]
 
-        self.dfs(dp, root, [], 1)
+        self.dfs(dp, root, 1)
         return self.result
 
 

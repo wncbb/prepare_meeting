@@ -4,15 +4,14 @@ import collections
 
 class TrieNode:
     def __init__(self, value):
-        self.isWord=False
         self.value=value
+        self.isWord=False
         self.children=collections.defaultdict()
-
     @classmethod
     def insert(cls, root, word):
         p=root
         for c in word:
-            # should be p, not root
+            # 用children[c] or chidlren.get(c)
             child=p.children.get(c)
             if child is None:
                 child=TrieNode(c)
@@ -21,43 +20,41 @@ class TrieNode:
         p.isWord=True
 
 class Solution:
-    def dfs(self, prevDp, root, tempWord, layer):
-        print 'tempWord ', tempWord
-        print 'prevDp ', prevDp
-        if root.isWord and prevDp[-1]<=self.k:
-            print tempWord
+    def helper(self, dp, node, tempWord, layer):
+        # 判断需要加上 and dp[len(dp)-1]<=k
+        # self.k, not k
+        if node.isWord and dp[len(dp)-1]<=self.k:
             self.result.append(''.join(tempWord))
 
-        for ch in root.children:
-            dp=[0]*len(self.target)
-            dp[0]=layer
+        # curDp咋来的?
+        # node有很多child， 每个一组dp
+        for ch in node.children:
+            curDp=[0]*len(self.target)
+            curDp[0]=layer
             for j in range(1, len(self.target)):
+                # should be self.target[j], not j
                 if ch==self.target[j]:
-                    dp[j]=prevDp[j-1]
+                    curDp[j]=dp[j-1]
                 else:
-                    dp[j]=min(prevDp[j], prevDp[j-1], dp[j-1])+1
-            tempWord.append(ch)
-            self.dfs(dp, root.children[ch], tempWord, layer+1)
+                    curDp[j]=min(dp[j], dp[j-1], curDp[j-1])+1
+
+            nextNode=node.children.get(ch)
+            tempWord.append(nextNode.value)
+            self.helper(curDp, nextNode, tempWord, layer+1)
             tempWord.pop()
 
     def kDistance(self, words, target, k):
-        self.result=[]
-        self.target='$'+target
-        self.k=k
-        
         root=TrieNode('')
         for word in words:
             TrieNode.insert(root, word)
 
-        # dp=[0]*len(target)
-        # for i in range(len(target)):
-        #     dp[i]=i
-        dp=[i for i in range(len(self.target))]
-
-        self.dfs(dp, root, [], 1)
+        target='$'+target
+        self.k=k
+        self.target=target
+        self.result=[]
+        dp=[i for i in range(len(target))]
+        self.helper(dp, root, [], 1)
         return self.result
-
-
 
 words=["abc", "abd", "abcd", "adc"]
 target="ac"
@@ -65,3 +62,4 @@ k=1
 
 s=Solution()
 print s.kDistance(words, target, k)
+

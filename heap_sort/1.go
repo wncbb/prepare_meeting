@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 func parent(i int) int {
 	return (i - 1) / 2
 }
@@ -35,11 +39,21 @@ func buildMaxHeap(a []int) {
 	}
 }
 
+func heapSort(a []int) {
+	buildMaxHeap(a)
+	for i := len(a) - 1; i > 0; i = i - 1 {
+		a[0], a[i] = a[i], a[0]
+		maxHeapify(a[:i], 0)
+	}
+}
+
 func main() {
 	a := []int{3, 8, 4, 6, 1, 9, 0, 5, 7, 2}
 	buildMaxHeap(a)
 	for _, v := range a {
 		println(v)
 	}
+	heapSort(a)
+	fmt.Printf("sorted rst: %#v\n", a)
 
 }

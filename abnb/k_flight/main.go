@@ -56,7 +56,7 @@ func findCheapestPrice(n int, flights [][]int, src int, dst int, K int) int {
 			// 	v[0], v[1], v[2], cost[v[1]], add(cost[v[0]], v[2]),
 			// 	getMin(cost[v[1]], add(cost[v[0]], v[2])),
 			// )
-			tmpCost[v[1]] = getMin(cost[v[1]], add(cost[v[0]], v[2]))
+			tmpCost[v[1]] = getMin(tmpCost[v[1]], add(cost[v[0]], v[2]))
 			// ERROR:
 			// tmpCost[v[1]] = getMin(cost[v[1]], add(cost[v[0]], v[2]))
 		}

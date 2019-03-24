@@ -131,5 +131,8 @@ func getLine(words []string, maxWidth int, isLast bool) string {
 func main() {
 	words := []string{"This", "is", "an", "example", "of", "text", "justification."}
 	maxWidth := 16
-	fullJustify(words, maxWidth)
+	rst := fullJustify(words, maxWidth)
+	for _, v := range rst {
+		println(v)
+	}
 }

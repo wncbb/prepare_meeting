@@ -14,6 +14,7 @@ class Solution:
     def pourWater(self, heights, V, K):
         for _ in range(V):
 
+            # 要么向左移动
             index = -1
             for i in range(K-1, -1, -1):
                 if heights[i] > heights[i+1]:
@@ -23,7 +24,8 @@ class Solution:
             if index != -1:
                 heights[index] += 1
                 continue
-
+            
+            # 要么向右移动
             index = -1
             for i in range(K+1, len(heights)):
                 if heights[i] > heights[i-1]:
@@ -34,6 +36,7 @@ class Solution:
                 heights[index] += 1
                 continue
 
+            # 要么待在原地
             heights[K] += 1
         return heights
 
