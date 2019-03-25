@@ -7,14 +7,14 @@ def dijkstra(edges, f, t):
         g[l].append((c,r))
 
     # qsm
-    q, seen, mins = [(0,f,())], set(), {f: 0}
+    # cnp
+    q, seen, mins = [(0,f,[])], set(), {f: 0}
     while q:
-        # cnp
         (cost,v1,path) = heappop(q)
         if v1 not in seen:
             seen.add(v1)
             # print 'v1:', v1, ' ,path:', path
-            path = (v1, path)
+            path.append(v1)
             if v1 == t: return (cost, path)
 
             for c, v2 in g.get(v1, ()):
@@ -23,7 +23,8 @@ def dijkstra(edges, f, t):
                 next = cost + c
                 if prev is None or next < prev:
                     mins[v2] = next
-                    heappush(q, (next, v2, path))
+                    # should be path[:], not path
+                    heappush(q, (next, v2, path[:]))
 
     return float("inf")
 

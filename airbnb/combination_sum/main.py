@@ -26,3 +26,12 @@ class Solution:
             if k > idx and A[k] == A[k-1]:
                 continue
             self.dfs(A, k+1, buf + [A[k]], res, target - A[k])
+
+
+s=Solution()
+num=[10,1,6,7,2,1,5]
+target=8
+rst=s.combinationSum2(num, target)
+for v in rst:
+    print v
+
