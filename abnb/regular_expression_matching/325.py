@@ -9,12 +9,36 @@ class Solution:
     """
     def isMatch(self, s, p):
         # write your code here
-        dp=[False]*(len(p)+1)*(len(s)+1)
+        dp=[[False for _ in range(len(p)+1)] for _ in range(len(s)+1)]
         print dp
 
+        dp[0][0]=True
+        for i in range(1, len(p)):
+            if p[i]=='*':
+                dp[0][i+1]=dp[0][i-1]
+
+        for i in range(len(s)):
+            for j in range(len(p)):
+                if p[j]=='.':
+                    dp[i+1][j+1]=dp[i][j]
+                elif p[j]=='*':
+                    if p[j-1]==s[i] or p[j-1]=='.':
+                        dp[i+1][j+1]=dp[i][j+1] or dp[i][j-1]
+                    dp[i+1][j+1]=dp[i+1][j+1] or dp[i+1][j-1]
+                elif p[j]=='+':
+                    if p[j-1]==s[i] or p[j-1]=='.':
+                        dp[i+1][j+1]=dp[i][j+1] or dp[i][j-1]
+                else:
+                    if s[i]==p[j]:
+                        dp[i+1][j+1]=dp[i][j]
 
 
-s=Solution()
+        return dp[len(s)][len(p)]
+
+
+
+
+c=Solution()
 s='aab'
 p='c*a*b'
-print s.isMatch(s, p)
+print c.isMatch(s, p)
