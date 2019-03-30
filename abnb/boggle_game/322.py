@@ -7,7 +7,7 @@ class TrieNode:
     @classmethod
     def insert(cls, root, word):
         p=root
-        for ch in word:
+        for ch in word: 
             child=p.children.get(ch)
             if child is None:
                 child=TrieNode(ch)
