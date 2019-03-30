@@ -14,7 +14,7 @@ class Solution:
 
         dp[0][0]=True
         for i in range(1, len(p)):
-            if p[i]=='*':
+            if p[i]=='*' or p[i]=='?':
                 dp[0][i+1]=dp[0][i-1]
 
         for i in range(len(s)):
@@ -28,6 +28,10 @@ class Solution:
                 elif p[j]=='+':
                     if p[j-1]==s[i] or p[j-1]=='.':
                         dp[i+1][j+1]=dp[i][j+1] or dp[i][j-1]
+                elif p[j]=='?':
+                    if p[j-1]==s[i] or p[j-1]=='.':
+                        dp[i+1][j+1]=dp[i][j]
+                    dp[i+1][j+1]=dp[i+1][j+1] or dp[i+1][j-1]
                 else:
                     if s[i]==p[j]:
                         dp[i+1][j+1]=dp[i][j]
@@ -39,6 +43,6 @@ class Solution:
 
 
 c=Solution()
-s='aab'
-p='c*a*b'
+s='aabb'
+p='aab?'
 print c.isMatch(s, p)
