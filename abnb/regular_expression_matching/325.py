@@ -44,5 +44,5 @@ class Solution:
 
 c=Solution()
 s='aabb'
-p='aab?'
+p='a?bb'
 print c.isMatch(s, p)
