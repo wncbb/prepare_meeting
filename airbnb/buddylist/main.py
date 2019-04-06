@@ -63,6 +63,6 @@ blists = [
   ]
 mlist = ["aa", "bb", "cc", "dd"]
 
-res=buddyListRec(mlist, blists, 2)
+res=buddyListRec(mlist, blists, 3)
 for v in res:
     print v

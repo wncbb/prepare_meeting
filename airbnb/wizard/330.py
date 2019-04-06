@@ -41,13 +41,26 @@ def dijkstra(edges, f, t):
 
 if __name__ == "__main__":
     edges = [
-        ("A", "B", 4),
-        ("A", "C", 3),
+        ("A", "B", 5),
+        ("A", "C", 1),
         ("B", "C", 2),
-        ("B", "D", 5),
-        ("C", "D", 1),
+        ("B", "D", 1),
+        ("C", "D", 4),
+        ("C", "E", 8),
+        ("D", "E", 3),
+        ("D", "F", 6),
+
+        ("B", "A", 5),
+        ("C", "A", 1),
+        ("C", "B", 2),
+        ("D", "B", 1),
+        ("D", "C", 4),
+        ("E", "C", 8),
+        ("E", "D", 3),
+        ("F", "D", 6),
+
     ]
 
     print "=== Dijkstra ==="
     print edges
-    print dijkstra(edges, "A", "D")
+    print dijkstra(edges, "A", "F")

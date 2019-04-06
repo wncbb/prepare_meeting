@@ -25,7 +25,8 @@ class Record:
         self.listingID=listingID
         self.score=score
         self.city=city
-        self.deleted=False
+        self.next=None
+        self.prev=None
     def getString(self):
         return ','.join([self.hostID, self.listingID, str(self.score), self.city])
 
@@ -39,10 +40,16 @@ def paginate(resultsPerPage, results):
         r=Record(curRst[0], curRst[1], float(curRst[2]), curRst[3])
         records.append(r)
     records=sorted(records, key=lambda x: x.score, reverse=True)
+    firstRecord=Record('', '', 0, '')
+    curRecord=firstRecord
+    for i in range(0, len(records)):
+        curRecord.next=records[i]
+        records[i].prev=curRecord
+        curRecord=curRecord.next
 
     res=[]
     while True:
-        curRes=getPage(records, resultsPerPage)
+        curRes=getPage(firstRecord, resultsPerPage)
         print 'cutRes: ', curRes
         print 'curRes', len(curRes)
         if len(curRes)!=0:
@@ -50,55 +57,84 @@ def paginate(resultsPerPage, results):
             res.append('')
         if len(curRes)<resultsPerPage:
             break
+        if curRecord is None:
+            break
     
     return res
 
 
 
-def getPage(records, pageSize):
+def getPage(r, pageSize):
     res=[]
     lookup=set()
     idx=0
-    for r in records:
-        if r.hostID in lookup:
+
+    firstR=r
+
+    while r is not None:
+        if r.hostID=='':
+            r=r.next
             continue
-        if r.deleted:
+        if r.hostID in lookup:
+            r=r.next
             continue
         lookup.add(r.hostID)
         res.append(r.getString())
-        r.deleted=True
+
+
+        parent=r.prev
+        child=r.next
+        parent.next=child
+        if child is not None:
+            child.prev=parent
+
+        r=child
+        
         idx=idx+1
         if idx==pageSize:
             return res
+
+    # for r in records:
+    #     if r.hostID in lookup:
+    #         continue
+    #     if r.deleted:
+    #         continue
+    #     lookup.add(r.hostID)
+    #     res.append(r.getString())
+    #     r.deleted=True
+    #     idx=idx+1
+    #     if idx==pageSize:
+    #         return res
+    r=firstR
     if len(res)<pageSize:
-        for r in records:
-            if r.deleted:
+        while r is not None:
+            if r.hostID=='':
+                r=r.next
                 continue
             res.append(r.getString())
+
+            parent=r.prev
+            child=r.next
+            parent.next=child
+            if child is not None:
+                child.prev=parent
+
+            r=child
+
             idx=idx+1
-            r.deleted=True
             if idx==pageSize:
                 return res
+            
     return res
     
 
-resultsPerPage = 5
+resultsPerPage = 1
 results = [
-  "1,28,300.6,San Francisco",
-  "4,5,209.1,San Francisco",
-  "20,7,203.4,Oakland",
-  "6,8,202.9,San Francisco",
-  "6,10,199.8,San Francisco",
-
-  "1,16,190.5,San Francisco",
-  "6,29,185.3,San Francisco",
-  "7,20,180.0,Oakland",
-  "6,21,162.2,San Francisco",
-  "2,18,161.7,San Jose",
-
-  "2,30,149.8,San Jose",
-  "3,76,146.7,San Francisco",
-  "2,14,141.8,San Jose"]
+'1,28,100.3,Paris',
+'4,5,99.2,Paris',
+'2,7,90.5,Paris',
+'8,8,87.6,Paris'
+ ]
 
 rst=paginate(resultsPerPage, results)
 for v in rst:

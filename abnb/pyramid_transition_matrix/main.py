@@ -37,6 +37,8 @@ class Solution:
 
 
 s=Solution()
-bottom="XYZ"
-allowed=["XYD", "YZE", "DEA", "FFF", "XYM", "YZN", "MNB"]
+# bottom="XYZ"
+# allowed=["XYD", "YZE", "DEA", "FFF", "XYM", "YZN", "MNB"]
+bottom='AB'
+allowed=['ABC', 'ABD']
 print s.pyramidTransition(bottom, allowed)

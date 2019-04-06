@@ -1,0 +1,21 @@
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+#
+# Complete the 'paginate' function below.
+#
+# The function is expected to return a STRING_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER resultsPerPage
+#  2. STRING_ARRAY results
+#
+
+def paginate(resultsPerPage, results):
+    # Write your code here
