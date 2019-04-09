@@ -4,11 +4,11 @@ def ipToVal(ip):
     ip = ip.split(".")
     val = 0
     for x in ip:
-        val = (val << 8) + int(x) 
+        val = (val << 8) | int(x) 
     return val
 
 
-def ValToIp(val):
+def ValToIp2(val):
     ip, i = ["0"] * 4, 3
     while val:
         ip[i] = str(val % (1 << 8)) 
@@ -16,7 +16,7 @@ def ValToIp(val):
         i -= 1
     return ".".join(ip)
 
-def ValToIp2(val):
+def ValToIp(val):
     ip, i = ["0"] * 4, 3
     while val:
         ip[i]=str(val&0xff)
@@ -49,7 +49,7 @@ v=123
 print ValToIp(v)
 
 
-start='10.10.10.1'
+start='10.2.10.1'
 stop ='10.10.10.4'
 rst=range2cidr(start, stop)
 for v in rst:

@@ -1,16 +1,16 @@
 
 def isOverlapping(a, b):
-    ax0=a[0][0]
-    ax1=a[1][0]
-    ay0=a[0][1]
-    ay1=a[1][1]
+    a0x=a[0][0]
+    a1x=a[1][0]
+    a0y=a[0][1]
+    a1y=a[1][1]
 
-    bx0=b[0][0]
-    bx1=b[1][0]
-    by0=b[0][1]
-    by1=b[1][1]
+    b0x=b[0][0]
+    b1x=b[1][0]
+    b0y=b[0][1]
+    b1y=b[1][1]
 
-    if (ax0>bx1 or ax1<bx0) or (ay0>by1 or ay1<by0):
+    if (a0x>b1x or a1x<b0x) or (a0y>b1y or a1y<b0y):
         return False
     return True
 
@@ -53,6 +53,7 @@ s=[
     [(5,5),(7,7)]
 ]
 
-rst=rectangleOverlapping(s)
-print rst
+# rst=rectangleOverlapping(s)
+# print rst
 
+print isOverlapping([(0, 0), (3, 3)], [(1, 1), (2, 2)])

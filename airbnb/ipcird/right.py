@@ -36,7 +36,7 @@ def range2cidr(start, end):
 
 
 
-start='10.10.10.1'
+start='10.2.10.1'
 stop ='10.10.10.4'
 rst=range2cidr(start, stop)
 for v in rst:

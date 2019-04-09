@@ -43,6 +43,6 @@ class Solution:
                 return (maxOfLeft+minOfRight)/2.0
 
 s1=[5, 6, 7, 8]
-s2=[0,1, 2,3]
+s2=[0, 1, 2, 3]
 s=Solution()
 print s.findMedianSortedArrays(s1, s2)

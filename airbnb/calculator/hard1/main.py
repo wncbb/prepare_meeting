@@ -40,5 +40,6 @@ class Solution:
 
 
 tmp="5+(1+2)-3"
+tmp='1+2-(3-4)+(2-1)'
 s=Solution()
 print s.calculate(tmp)
