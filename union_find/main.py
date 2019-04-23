@@ -5,6 +5,8 @@ class UnionFindSet:
         for i in range(n):
             self.parents.append(i)
             self.ranks.append(0)
+    def connected(self, a, b):
+        return self.find(a)==self.find(b)
     
     def find(self, x):
         if x!=self.parents[x]:
@@ -36,3 +38,5 @@ t.union(0, 2)
 
 print t.parents
 print t.ranks
+
+print t.connected(0, 3)
